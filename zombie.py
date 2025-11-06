@@ -35,7 +35,6 @@ class Zombie:
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1,1])
 
-
     def get_bb(self):
         if self.size == 200:
             return self.x - 70, self.y - 100, self.x + 70, self.y + 90
