@@ -21,6 +21,7 @@ animation_names = ['Walk']
 
 class Zombie:
     images = None
+    size = 200
 
     def load_images(self):
         if Zombie.images == None:
@@ -36,7 +37,10 @@ class Zombie:
 
 
     def get_bb(self):
-        return self.x - 70, self.y - 100, self.x + 70, self.y + 90
+        if self.size == 200:
+            return self.x - 70, self.y - 100, self.x + 70, self.y + 90
+        elif self.size == 100:
+            return self.x - 35, self.y - 50, self.x + 35, self.y + 45
 
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
@@ -51,9 +55,9 @@ class Zombie:
 
     def draw(self):
         if self.dir < 0:
-            Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, 200, 200)
+            Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, self.size, self.size)
         else:
-            Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, 200, 200)
+            Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, self.size, self.size)
         draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
